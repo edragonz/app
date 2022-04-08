@@ -67,7 +67,7 @@
 
 <script>
 import { mapState } from 'vuex'
-import throttle from 'Lodash/throttle'
+import throttle from 'lodash.throttle'
 export default {
   name: 'TypeNav',
   data() {
@@ -89,7 +89,7 @@ export default {
     ...mapState({
       //右侧需要的是一个函数，当试用这个计算属性的时候，右侧函数会立即执行一次
       //注入一个参数state，其实即为大仓库中的数据
-      categoryList:(state)=>state.home.categoryList
+      categoryList: (state) => state.home.categoryList,
     }),
   },
   methods: {
@@ -112,7 +112,7 @@ export default {
       //节点有个detaset属性，可以获取节点的自定义属性与属性值
       let { categoryname, category1id, category2id, category3id } =
         element.dataset
-      if (categoryname) {
+      if (categoryname && this.$route.query.categoryName !== categoryname) {
         let location = { name: 'search' }
         let query = { categoryName: categoryname }
         if (category1id) {
@@ -123,9 +123,12 @@ export default {
           query.category3Id = category3id
         }
         //判断：如果路由跳转的时候，带有params参数，捎带传递过去
-        if (this.$route.params) {
+        if (this.$route.params.keyWord) {
           location.query = query
           location.params = this.$route.params
+          this.$router.push(location)
+        } else {
+          location.query = query
           this.$router.push(location)
         }
       }

@@ -61,18 +61,17 @@ export default {
     goSearch() {
       //路由传参
       // console.log('goSearch被触发了', this.$router)
-      console.log(this.$route.path.indexOf('/search'))
-      if (this.$route.path.indexOf('/search') !== -1) {
-        return
+      // if (this.$route.path.indexOf('/search') !== -1) {
+      //   return
+      // }
+      if (this.$route.params.keyword === this.keyword) return
+      let location = {
+        name: 'search',
+        params: { keyword: this.keyword || undefined },
       }
-      if (this.$route.query) {
-        let location = {
-          name: 'search',
-          params: { keyword: this.keyword || undefined },
-        }
-        location.query = this.$route.query
-        this.$router.push(location)
-      }
+      location.query = this.$route.query
+      this.$router.push(location)
+
       // this.$router.push(
       //   '/search/' + this.keyword + '?k=' + this.keyword.toUpperCase()
       // )
