@@ -12,12 +12,20 @@
           </ul>
           <ul class="fl sui-tag">
             <li class="with-x"
-                v-if="searchParams.categoryName">{{searchParams.categoryName}}<i @click="removeCategoryName">×</i></li>
+                v-if="searchParams.categoryName">{{searchParams.categoryName}}<i @click="removeCategoryName(searchParams.keyword)">×</i></li>
+            <li class="with-x"
+                v-if="searchParams.keyword">{{searchParams.keyword}}<i @click="removekeyword(searchParams.categoryName)">×</i></li>
+            <li class="with-x"
+                v-if="trademark">{{trademark}}<i @click="removetrademark">×</i></li>
+            <li class="with-x"
+                v-for="(attr,value) in searchParams.props"
+                :key="value">{{attr.split(":")[1]}}<i @click="removetattr(attr)">×</i></li>
           </ul>
         </div>
 
         <!--selector-->
-        <SearchSelector />
+        <SearchSelector @trademarksearch=trademarksearch
+                        @attrsearch=attrsearch />
 
         <!--details-->
         <div class="details clearfix">
@@ -80,267 +88,6 @@
                   </div>
                 </div>
               </li>
-              <!-- <li class="yui3-u-1-5">
-                <div class="list-wrap">
-                  <div class="p-img">
-                    <img src="./images/mobile02.png" />
-                  </div>
-                  <div class="price">
-                    <strong>
-                      <em>¥</em>
-                      <i>6088.00</i>
-                    </strong>
-                  </div>
-                  <div class="attr">
-                    <a target="_blank"
-                       href="item.html"
-                       title="促销信息，下单即赠送三个月CIBN视频会员卡！【小米电视新品4A 58 火爆预约中】">Apple苹果iPhone
-                      6s (A1699)Apple苹果iPhone 6s (A1699)Apple苹果iPhone 6s (A1699)Apple苹果iPhone 6s (A1699)</a>
-                  </div>
-                  <div class="commit">
-                    <i class="command">已有<span>2000</span>人评价</i>
-                  </div>
-                  <div class="operate">
-                    <a href="success-cart.html"
-                       target="_blank"
-                       class="sui-btn btn-bordered btn-danger">加入购物车</a>
-                    <a href="javascript:void(0);"
-                       class="sui-btn btn-bordered">收藏</a>
-                  </div>
-                </div>
-              </li>
-              <li class="yui3-u-1-5">
-                <div class="list-wrap">
-                  <div class="p-img">
-                    <img src="./images/mobile03.png" />
-                  </div>
-                  <div class="price">
-                    <strong>
-                      <em>¥</em>
-                      <i>6088.00</i>
-                    </strong>
-                  </div>
-                  <div class="attr">
-                    <a target="_blank"
-                       href="item.html"
-                       title="促销信息，下单即赠送三个月CIBN视频会员卡！【小米电视新品4A 58 火爆预约中】">Apple苹果iPhone
-                      6s (A1699)Apple苹果iPhone 6s (A1699)Apple苹果iPhone 6s (A1699)Apple苹果iPhone 6s (A1699)</a>
-                  </div>
-                  <div class="commit">
-                    <i class="command">已有<span>2000</span>人评价</i>
-                  </div>
-                  <div class="operate">
-                    <a href="success-cart.html"
-                       target="_blank"
-                       class="sui-btn btn-bordered btn-danger">加入购物车</a>
-                    <a href="javascript:void(0);"
-                       class="sui-btn btn-bordered">收藏</a>
-                  </div>
-                </div>
-              </li>
-              <li class="yui3-u-1-5">
-                <div class="list-wrap">
-                  <div class="p-img">
-                    <img src="./images/mobile04.png" />
-                  </div>
-                  <div class="price">
-                    <strong>
-                      <em>¥</em>
-                      <i>6088.00</i>
-                    </strong>
-                  </div>
-                  <div class="attr">
-                    <a target="_blank"
-                       href="item.html"
-                       title="促销信息，下单即赠送三个月CIBN视频会员卡！【小米电视新品4A 58 火爆预约中】">Apple苹果iPhone
-                      6s (A1699)Apple苹果iPhone 6s (A1699)Apple苹果iPhone 6s (A1699)Apple苹果iPhone 6s (A1699)</a>
-                  </div>
-                  <div class="commit">
-                    <i class="command">已有<span>2000</span>人评价</i>
-                  </div>
-                  <div class="operate">
-                    <a href="success-cart.html"
-                       target="_blank"
-                       class="sui-btn btn-bordered btn-danger">加入购物车</a>
-                    <a href="javascript:void(0);"
-                       class="sui-btn btn-bordered">收藏</a>
-                  </div>
-                </div>
-              </li>
-              <li class="yui3-u-1-5">
-                <div class="list-wrap">
-                  <div class="p-img">
-                    <img src="./images/mobile05.png" />
-                  </div>
-                  <div class="price">
-                    <strong>
-                      <em>¥</em>
-                      <i>6088.00</i>
-                    </strong>
-                  </div>
-                  <div class="attr">
-                    <a target="_blank"
-                       href="item.html"
-                       title="促销信息，下单即赠送三个月CIBN视频会员卡！【小米电视新品4A 58 火爆预约中】">Apple苹果iPhone
-                      6s (A1699)Apple苹果iPhone 6s (A1699)Apple苹果iPhone 6s (A1699)Apple苹果iPhone 6s (A1699)</a>
-                  </div>
-                  <div class="commit">
-                    <i class="command">已有<span>2000</span>人评价</i>
-                  </div>
-                  <div class="operate">
-                    <a href="success-cart.html"
-                       target="_blank"
-                       class="sui-btn btn-bordered btn-danger">加入购物车</a>
-                    <a href="javascript:void(0);"
-                       class="sui-btn btn-bordered">收藏</a>
-                  </div>
-                </div>
-              </li>
-              <li class="yui3-u-1-5">
-                <div class="list-wrap">
-                  <div class="p-img">
-                    <img src="./images/mobile06.png" />
-                  </div>
-                  <div class="price">
-                    <strong>
-                      <em>¥</em>
-                      <i>6088.00</i>
-                    </strong>
-                  </div>
-                  <div class="attr">
-                    <a target="_blank"
-                       href="item.html"
-                       title="促销信息，下单即赠送三个月CIBN视频会员卡！【小米电视新品4A 58 火爆预约中】">Apple苹果iPhone
-                      6s (A1699)Apple苹果iPhone 6s (A1699)Apple苹果iPhone 6s (A1699)Apple苹果iPhone 6s (A1699)</a>
-                  </div>
-                  <div class="commit">
-                    <i class="command">已有<span>2000</span>人评价</i>
-                  </div>
-                  <div class="operate">
-                    <a href="success-cart.html"
-                       target="_blank"
-                       class="sui-btn btn-bordered btn-danger">加入购物车</a>
-                    <a href="javascript:void(0);"
-                       class="sui-btn btn-bordered">收藏</a>
-                  </div>
-                </div>
-              </li>
-              <li class="yui3-u-1-5">
-                <div class="list-wrap">
-                  <div class="p-img">
-                    <img src="./images/mobile01.png" />
-                  </div>
-                  <div class="price">
-                    <strong>
-                      <em>¥</em>
-                      <i>6088.00</i>
-                    </strong>
-                  </div>
-                  <div class="attr">
-                    <a target="_blank"
-                       href="item.html"
-                       title="促销信息，下单即赠送三个月CIBN视频会员卡！【小米电视新品4A 58 火爆预约中】">Apple苹果iPhone
-                      6s (A1699)Apple苹果iPhone 6s (A1699)Apple苹果iPhone 6s (A1699)Apple苹果iPhone 6s (A1699)</a>
-                  </div>
-                  <div class="commit">
-                    <i class="command">已有<span>2000</span>人评价</i>
-                  </div>
-                  <div class="operate">
-                    <a href="success-cart.html"
-                       target="_blank"
-                       class="sui-btn btn-bordered btn-danger">加入购物车</a>
-                    <a href="javascript:void(0);"
-                       class="sui-btn btn-bordered">收藏</a>
-                  </div>
-                </div>
-              </li>
-              <li class="yui3-u-1-5">
-                <div class="list-wrap">
-                  <div class="p-img">
-                    <img src="./images/mobile02.png" />
-                  </div>
-                  <div class="price">
-                    <strong>
-                      <em>¥</em>
-                      <i>6088.00</i>
-                    </strong>
-                  </div>
-                  <div class="attr">
-                    <a target="_blank"
-                       href="item.html"
-                       title="促销信息，下单即赠送三个月CIBN视频会员卡！【小米电视新品4A 58 火爆预约中】">Apple苹果iPhone
-                      6s (A1699)Apple苹果iPhone 6s (A1699)Apple苹果iPhone 6s (A1699)Apple苹果iPhone 6s (A1699)</a>
-                  </div>
-                  <div class="commit">
-                    <i class="command">已有<span>2000</span>人评价</i>
-                  </div>
-                  <div class="operate">
-                    <a href="success-cart.html"
-                       target="_blank"
-                       class="sui-btn btn-bordered btn-danger">加入购物车</a>
-                    <a href="javascript:void(0);"
-                       class="sui-btn btn-bordered">收藏</a>
-                  </div>
-                </div>
-              </li>
-              <li class="yui3-u-1-5">
-                <div class="list-wrap">
-                  <div class="p-img">
-                    <img src="./images/mobile03.png" />
-                  </div>
-                  <div class="price">
-                    <strong>
-                      <em>¥</em>
-                      <i>6088.00</i>
-                    </strong>
-                  </div>
-                  <div class="attr">
-                    <a target="_blank"
-                       href="item.html"
-                       title="促销信息，下单即赠送三个月CIBN视频会员卡！【小米电视新品4A 58 火爆预约中】">Apple苹果iPhone
-                      6s (A1699)Apple苹果iPhone 6s (A1699)Apple苹果iPhone 6s (A1699)Apple苹果iPhone 6s (A1699)</a>
-                  </div>
-                  <div class="commit">
-                    <i class="command">已有<span>2000</span>人评价</i>
-                  </div>
-                  <div class="operate">
-                    <a href="success-cart.html"
-                       target="_blank"
-                       class="sui-btn btn-bordered btn-danger">加入购物车</a>
-                    <a href="javascript:void(0);"
-                       class="sui-btn btn-bordered">收藏</a>
-                  </div>
-                </div>
-              </li>
-              <li class="yui3-u-1-5">
-                <div class="list-wrap">
-                  <div class="p-img">
-                    <img src="./images/mobile04.png" />
-                  </div>
-                  <div class="price">
-                    <strong>
-                      <em>¥</em>
-                      <i>6088.00</i>
-                    </strong>
-                  </div>
-                  <div class="attr">
-                    <a target="_blank"
-                       href="item.html"
-                       title="促销信息，下单即赠送三个月CIBN视频会员卡！【小米电视新品4A 58 火爆预约中】">Apple苹果iPhone
-                      6s (A1699)Apple苹果iPhone 6s (A1699)Apple苹果iPhone 6s (A1699)Apple苹果iPhone 6s (A1699)</a>
-                  </div>
-                  <div class="commit">
-                    <i class="command">已有<span>2000</span>人评价</i>
-                  </div>
-                  <div class="operate">
-                    <a href="success-cart.html"
-                       target="_blank"
-                       class="sui-btn btn-bordered btn-danger">加入购物车</a>
-                    <a href="javascript:void(0);"
-                       class="sui-btn btn-bordered">收藏</a>
-                  </div>
-                </div>
-              </li> -->
             </ul>
           </div>
           <div class="fr page">
@@ -386,6 +133,7 @@ export default {
   components: { SearchSelector },
   data() {
     return {
+      trademark: '',
       searchParams: {
         category1Id: '',
         category2Id: '',
@@ -414,22 +162,57 @@ export default {
     $route(newValue, oldValue) {
       // this.searchParams = ''
       // this.searchParams = ''
-      this.searchParams.category1Id = ''
-      this.searchParams.category2Id = ''
-      this.searchParams.category3Id = ''
+      this.searchParams.category1Id = undefined
+      this.searchParams.category2Id = undefined
+      this.searchParams.category3Id = undefined
       Object.assign(this.searchParams, this.$route.query, this.$route.params)
       this.getDate()
     },
   },
   methods: {
+    trademarksearch(trademark) {
+      this.searchParams.trademark = `${trademark.tmId}:${trademark.tmName}`
+      this.trademark = trademark.tmName
+      this.getDate()
+    },
+    attrsearch(attr, attrValue) {
+      let props = `${attr.attrId}:${attrValue}:${attr.attrName}`
+      if (this.searchParams.props.indexOf(props) == -1) {
+        this.searchParams.props.push(props)
+      } else return
+      this.getDate()
+    },
     getDate() {
       this.$store.dispatch('GetSearchList', this.searchParams)
     },
-    removeCategoryName() {
-      this.searchParams.categoryName = ''
-      this.searchParams.category1Id = ''
-      this.searchParams.category2Id = ''
-      this.searchParams.category3Id = ''
+    removeCategoryName(keyword) {
+      this.searchParams.categoryName = undefined
+      this.searchParams.category1Id = undefined
+      this.searchParams.category2Id = undefined
+      this.searchParams.category3Id = undefined
+      this.getDate()
+      console.log()
+      this.$router.push({ name: 'search', params: { keyword } })
+    },
+    removekeyword(name) {
+      if (name) {
+        this.searchParams.keyword = undefined
+        this.getDate()
+        this.$router.push({ name: 'search', query: this.$route.query })
+      } else {
+        this.$router.push({ name: 'search' })
+      }
+      this.$bus.$emit('clear')
+    },
+    removetrademark() {
+      this.trademark = undefined
+      this.searchParams.trademark = undefined
+      this.getDate()
+    },
+    removetattr(attr) {
+      this.searchParams.props = this.searchParams.props.filter(
+        (value) => value !== attr
+      )
       this.getDate()
     },
   },
