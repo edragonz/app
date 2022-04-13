@@ -4,6 +4,8 @@ import TypeNav from '@/components/TypeNav'
 Vue.component(TypeNav.name, TypeNav)
 import Carousel from '@/components/Carousel'
 Vue.component(Carousel.name, Carousel)
+import Pagination from '@/components/Pagination'
+Vue.component(Pagination.name, Pagination)
 //引入路由
 import VueRouter from 'vue-router'
 import router from './router/index';

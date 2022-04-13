@@ -32,11 +32,17 @@
           <div class="sui-navbar">
             <div class="navbar-inner filter">
               <ul class="sui-nav">
-                <li :class="{active:searchParams.order.indexOf('1') !=-1}">
-                  <a>综合</a>
+                <li :class="{active:isOne}"
+                    @click="changeOrder(1)">
+                  <a>综合<span v-show="isOne"
+                          class="iconfont"
+                          :class="{'icon-pulldown':isDesc,'icon-pullup':isAsc}"></span></a>
                 </li>
-                <li :class="{active:searchParams.order.indexOf('2') !=-1}">
-                  <a>价格⬆</a>
+                <li :class="{active:isTwo}"
+                    @click="changeOrder(2)">
+                  <a>价格<span v-show="isTwo"
+                          class="iconfont"
+                          :class="{'icon-pulldown':isDesc,'icon-pullup':isAsc}"></span></a>
                 </li>
               </ul>
             </div>
@@ -78,35 +84,7 @@
               </li>
             </ul>
           </div>
-          <div class="fr page">
-            <div class="sui-pagination clearfix">
-              <ul>
-                <li class="prev disabled">
-                  <a href="#">«上一页</a>
-                </li>
-                <li class="active">
-                  <a href="#">1</a>
-                </li>
-                <li>
-                  <a href="#">2</a>
-                </li>
-                <li>
-                  <a href="#">3</a>
-                </li>
-                <li>
-                  <a href="#">4</a>
-                </li>
-                <li>
-                  <a href="#">5</a>
-                </li>
-                <li class="dotted"><span>...</span></li>
-                <li class="next">
-                  <a href="#">下一页»</a>
-                </li>
-              </ul>
-              <div><span>共10页&nbsp;</span></div>
-            </div>
-          </div>
+          <Pagination :pageNo="10" :pageSize="10" :total="90" continues="5" />
         </div>
       </div>
     </div>
@@ -128,7 +106,7 @@ export default {
         category3Id: '',
         categoryName: '',
         keyword: '',
-        order: '',
+        order: '1:desc',
         pageNo: 1,
         pageSize: '10',
         props: [],
@@ -145,6 +123,18 @@ export default {
   },
   computed: {
     ...mapGetters(['goodsList', 'trademarkList', 'attrsList']),
+    isOne() {
+      return this.searchParams.order.indexOf('1') != -1
+    },
+    isTwo() {
+      return this.searchParams.order.indexOf('2') != -1
+    },
+    isAsc() {
+      return this.searchParams.order.indexOf('asc') != -1
+    },
+    isDesc() {
+      return this.searchParams.order.indexOf('desc') != -1
+    },
   },
   watch: {
     $route(newValue, oldValue) {
@@ -158,6 +148,18 @@ export default {
     },
   },
   methods: {
+    changeOrder(flag) {
+      if (flag != this.searchParams.order.split(':')[0]) {
+        this.searchParams.order = `${flag}:desc`
+      } else {
+        if (this.isAsc) {
+          this.searchParams.order = `${flag}:desc`
+        } else {
+          this.searchParams.order = `${flag}:asc`
+        }
+      }
+      this.getDate()
+    },
     trademarksearch(trademark) {
       this.searchParams.trademark = `${trademark.tmId}:${trademark.tmName}`
       this.trademark = trademark.tmName
@@ -446,93 +448,6 @@ export default {
                 }
               }
             }
-          }
-        }
-      }
-
-      .page {
-        width: 733px;
-        height: 66px;
-        overflow: hidden;
-        float: right;
-
-        .sui-pagination {
-          margin: 18px 0;
-
-          ul {
-            margin-left: 0;
-            margin-bottom: 0;
-            vertical-align: middle;
-            width: 490px;
-            float: left;
-
-            li {
-              line-height: 18px;
-              display: inline-block;
-
-              a {
-                position: relative;
-                float: left;
-                line-height: 18px;
-                text-decoration: none;
-                background-color: #fff;
-                border: 1px solid #e0e9ee;
-                margin-left: -1px;
-                font-size: 14px;
-                padding: 9px 18px;
-                color: #333;
-              }
-
-              &.active {
-                a {
-                  background-color: #fff;
-                  color: #e1251b;
-                  border-color: #fff;
-                  cursor: default;
-                }
-              }
-
-              &.prev {
-                a {
-                  background-color: #fafafa;
-                }
-              }
-
-              &.disabled {
-                a {
-                  color: #999;
-                  cursor: default;
-                }
-              }
-
-              &.dotted {
-                span {
-                  margin-left: -1px;
-                  position: relative;
-                  float: left;
-                  line-height: 18px;
-                  text-decoration: none;
-                  background-color: #fff;
-                  font-size: 14px;
-                  border: 0;
-                  padding: 9px 18px;
-                  color: #333;
-                }
-              }
-
-              &.next {
-                a {
-                  background-color: #fafafa;
-                }
-              }
-            }
-          }
-
-          div {
-            color: #333;
-            font-size: 14px;
-            float: right;
-            width: 241px;
           }
         }
       }
